@@ -15,3 +15,23 @@
 
   - name: upgrade system packages
     apt: upgrade=yes
+
+  - name: install important packages
+    apt: 
+        name: "{{ packages }}" 
+    vars:
+        packages:
+        - curl
+        - fonts-powerline
+        - git
+        - git-core
+        - golang
+        - neovim
+        - net-tools
+        - openjdk-8-jdk
+        - sl
+        - tmux
+        - zsh
+
+  - name: write keyboard preferences to /etc/default/keyboard
+    shell: echo 'XKBLAYOUT="us,us"\nXKBVARIANT="dvorak,"\nBACKSPACE="guess"\nXKBMODEL="pc105"\nXKBOPTIONS="grp_led:scroll"' > /etc/default/keyboard

@@ -2,21 +2,24 @@
 
 - name: run initial ubuntu setup
   hosts: localhost
-  become: yes
   tasks:
 
   - name: ensure aptitude is installed
+    become: yes
     command: apt-get -y install aptitude
     args:
         warn: false
 
   - name: update the apt package index
+    become: yes
     apt: update_cache=yes
 
   - name: upgrade system packages
+    become: yes
     apt: upgrade=yes
 
   - name: install important packages
+    become: yes
     apt: 
         name: "{{ packages }}" 
     vars:
@@ -34,4 +37,12 @@
         - zsh
 
   - name: write keyboard preferences to /etc/default/keyboard
+    become: yes
     shell: echo 'XKBLAYOUT="us,us"\nXKBVARIANT="dvorak,"\nBACKSPACE="guess"\nXKBMODEL="pc105"\nXKBOPTIONS="grp_led:scroll"' > /etc/default/keyboard
+
+  - name: set up zsh
+    shell: |
+        sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+        sed -i -e  's/ZSH_THEME=".*"/ZSH_THEME="agnoster"'
+        chsh -s $(which zsh)
+

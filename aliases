@@ -1,0 +1,8 @@
+alias clog="vim ~/.clog"
+alias gw="./gradlew"
+alias gfp="git fetch && git pull"
+alias sagu="sudo apt-get update"
+alias sagi="sudo apt-get install"
+alias t="tmux"
+alias tks="tmux kill-session"
+

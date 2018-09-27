@@ -4,6 +4,7 @@
   hosts: localhost
   vars:
     username: awest
+    zsh_theme: agnoster
   tasks:
 
   - name: ensure aptitude is installed
@@ -45,7 +46,7 @@
   - name: set up zsh
     shell: |
         sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-        sed -i -e  's/ZSH_THEME=".*"/ZSH_THEME="agnoster"' ~/.zshrc
+        sed -i -e  's/ZSH_THEME=".*"/ZSH_THEME="{{ zsh_theme }}"' ~/.zshrc
         chsh -s $(which zsh)
         git clone https://github.com/zsh-users/zsh-syntax-highlighting .oh-my-zsh/custom/plugins/zsh-syntax-highlighting
         git clone https://github.com/zsh-users/zsh-autosuggestions .oh-my-zsh/custom/plugins/zsh-autosuggestions

@@ -34,10 +34,14 @@
         - golang
         - neovim
         - net-tools
-        - openjdk-8-jdk
         - sl
         - tmux
         - zsh
+
+  - name: install sdkman
+    shell: |
+        curl -s "https://get.sdkman.io" | bash
+        source ~/.sdkman/bin/sdkman-init.sh
 
   - name: write keyboard preferences to /etc/default/keyboard
     become: yes
@@ -61,3 +65,8 @@
   - name: add loading of aliases to .zshrc
     shell: cat 'if [ -f ~/.zsh_aliases ]; then\n\t. ~/.zsh_aliases/nfi' >> ~/.zsh_aliases
 
+  - name: download latest version of java
+    shell: sdk install java
+
+  - name: download latest version of gradle
+    shell: sdk install gradle

@@ -57,3 +57,7 @@
         src: aliases
         dest: ~/.zsh_aliases
         owner: "{{ username }}"
+
+  - name: add loading of aliases to .zshrc
+    shell: cat 'if [ -f ~/.zsh_aliases ]; then\n\t. ~/.zsh_aliases/nfi' >> ~/.zsh_aliases
+

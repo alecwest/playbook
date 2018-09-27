@@ -43,6 +43,20 @@
         curl -s "https://get.sdkman.io" | bash
         source ~/.sdkman/bin/sdkman-init.sh
 
+  - name: install docker
+    become: yes
+    shell: |
+        curl -sSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+        add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu$(lsb_release -cs)stable"
+        apt-get install docker-ce
+
+  - name: add {{ username }} to docker group
+    become: yes
+    shell: |
+        groupadd docker
+        gpasswd -a {{ username }} docker
+        newgrp docker
+
   - name: write keyboard preferences to /etc/default/keyboard
     become: yes
     shell: echo 'XKBLAYOUT="us,us"\nXKBVARIANT="dvorak,"\nBACKSPACE="guess"\nXKBMODEL="pc105"\nXKBOPTIONS="grp_led:scroll"' > /etc/default/keyboard

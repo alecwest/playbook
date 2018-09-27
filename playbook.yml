@@ -2,6 +2,8 @@
 
 - name: run initial ubuntu setup
   hosts: localhost
+  vars:
+    username: awest
   tasks:
 
   - name: ensure aptitude is installed
@@ -51,6 +53,6 @@
 
   - name: copy over aliases
     copy:
-        src: ./aliases
+        src: aliases
         dest: ~/.zsh_aliases
-        owner: # TODO define vars in hosts.yml?
+        owner: "{{ username }}"
